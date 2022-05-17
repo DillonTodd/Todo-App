@@ -27,3 +27,13 @@ def create_todo(request):
         serializer.save()
 
     return Response(serializer.data)
+
+@api_view(['POST'])
+def update_todo(request, id):
+    todo = Todo.objects.get(id=id)
+    serializer = TodoSerializer(instance=todo, data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+    
+    return Response(serializer.data)
