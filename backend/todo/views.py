@@ -18,3 +18,12 @@ def todo(request, id):
     serializer = TodoSerializer(todo)
 
     return Response(serializer.data)
+
+@api_view(['POST'])
+def create_todo(request):
+    serializer = TodoSerializer(data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
