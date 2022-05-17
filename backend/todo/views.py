@@ -11,3 +11,10 @@ def todo_list(request):
     serializer = TodoSerializer(todos, many=True)
 
     return Response(serializer.data)
+
+@api_view(['GET'])
+def todo(request, id):
+    todo = Todo.objects.get(id=id)
+    serializer = TodoSerializer(todo)
+
+    return Response(serializer.data)
